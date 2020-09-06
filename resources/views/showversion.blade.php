@@ -2,7 +2,7 @@
 @section('content')
 <div class="card">
     <div class="card-header bg-primary text-white">
-        <span class="float-left"><strong>{{ $note -> title }}</strong> </span>
+        <span class="float-left"><strong>{{ $note -> title }}</strong>&nbsp;(ver. {{ $note -> version }})</span>
         <span class="float-right">
             {{ date('d. m. Y. H:i', strtotime($note -> created_at)) }}&nbsp;&nbsp;&nbsp;
             <a href="{{ route('edit', $note -> id)}}">
@@ -21,9 +21,15 @@
             </div>
             <div class="col text-right text-white">
                 @foreach($versions as $version)
-                <a href="{{ route('version', $version -> id) }}" class="btn btn-sm btn-dark" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}">
-                    {{$version -> version}}
-                </a>
+                    @if($version -> id == $note -> id)
+                        <a href="{{ route('version', $version -> id) }}" class="btn btn-sm btn-danger" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}">
+                            {{$version -> version}}
+                        </a>
+                    @else
+                        <a href="{{ route('version', $version -> id) }}" class="btn btn-sm btn-dark" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}">
+                            {{$version -> version}}
+                        </a>
+                    @endif
                 @endforeach
             </div>
         </div>
