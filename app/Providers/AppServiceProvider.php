@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view){
             if(Auth::check()){
                 $user_id = Auth::id();
-                $categories = Category::with('notes')->get();
+                $categories = Category::with('notes')->get()->sortBy('description');
                 $view->with(['categories' => $categories]);
             }
         });
