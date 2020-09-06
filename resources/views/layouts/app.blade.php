@@ -3,18 +3,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
+    <!-- include libraries(jQuery, bootstrap) -->
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <title>{{ config('app.name', 'Notes') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -24,7 +30,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Notes') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -73,8 +79,76 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @if ($errors->any())
+                <div class="container">
+                    <div class="alert alert-danger alert-dismissible text-center">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Zatvori">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+
+                @if (Session::has('message'))
+                <div class="container">
+                    <div class="alert alert-info alert-dismissible text-center" role="alert">
+                        {{ Session::get('message') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Zatvori">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+
+                @if (Session::has('warning'))
+                <div class="container">
+                    <div class="alert alert-warning alert-dismissible text-center" role="alert">
+                        {{ Session::get('warning') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Zatvori">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+
+                @if (Session::has('alert'))
+                <div class="container">
+                    <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                        {{ Session::get('alert') }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Zatvori">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                @endif
+
+                <div class="row">
+                    <div class="col-1">
+                        @include('sidebar')
+                    </div>
+                    <div class="col ml-4">
+                        @yield('content')
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
+
+<script>
+$(document).ready(function() {
+    $('#summernote').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true                  // set focus to editable area after initializing summernote
+    });
+});
+</script>
 </body>
 </html>
