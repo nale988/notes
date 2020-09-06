@@ -129,7 +129,7 @@
                 @endif
 
                 <div class="row">
-                    <div class="col-1">
+                    <div class="col-2">
                         @include('sidebar')
                     </div>
                     <div class="col ml-4">
