@@ -158,6 +158,7 @@ $(document).ready(function() {
             ['table', ['table']],
             ['insert', ['link']],
             ['view', ['fullscreen', 'codeview', 'help']],
+            ['height', ['height']]
         ],
     });
 });
