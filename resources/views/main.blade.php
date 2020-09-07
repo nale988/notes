@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-2">
-            <button class="btn btn-primary btn-sm justify-content-center" type="submit">Sačuvaj</button>
+            <button class="btn btn-primary btn-sm float-right pr-2" type="submit">Sačuvaj</button>
         </div>
     </div>
 </form>
