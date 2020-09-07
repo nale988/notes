@@ -130,11 +130,13 @@
                 @endif
 
                 @if($ismobile)
+                @auth
                 <div class="row">
                     <div class="col">
                         @include('sidebar')
                     </div>
                 </div>
+                @endauth
                 <div class="row">
                     <div class="col mt-4">
                         @yield('content')
@@ -142,9 +144,11 @@
                 </div>
                 @else
                 <div class="row">
+                    @auth
                     <div class="col-2">
                         @include('sidebar')
                     </div>
+                    @endauth
                     <div class="col ml-4">
                         @yield('content')
                     </div>
