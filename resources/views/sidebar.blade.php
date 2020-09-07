@@ -12,8 +12,8 @@
     <div class="collapse" id="c{{ preg_replace('/[^a-z0-9.]+/i', '-', $category->description) }}">
         <ul class="list-unstyled">
         @foreach($category -> notes as $note)
-            <li class="btn btn-link">
-                <a href="{{ route('show', $note -> id) }}" >
+            <li>
+                <a class="btn btn-link" href="{{ route('show', $note -> id) }}" >
                     {{ $note -> title }}
                 </a>
             </li>
