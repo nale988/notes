@@ -129,7 +129,7 @@
                 </div>
                 @endif
 
-                @if($isMobile)
+                @if($ismobile)
                 <div class="row">
                     <div class="col">
                         @include('sidebar')
