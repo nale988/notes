@@ -12,7 +12,7 @@
         <textarea id="summernote" name="editordata"></textarea>
     </div>
     <div class="form-row">
-        <div class="col-6">
+        <div class="col-10">
             <div class="form-group">
                 <select class="form-control" name="category" id="category">
                     @foreach($categories as $category)
@@ -21,9 +21,8 @@
                 </select>
             </div>
         </div>
-        <div class="col"></div>
-        <div class="col-1">
-            <button class="btn btn-primary" type="submit">Sačuvaj</button>
+        <div class="col-2">
+            <button class="btn btn-primary btn-sm text-right" type="submit">Sačuvaj</button>
         </div>
     </div>
 </form>
