@@ -15,6 +15,8 @@ class Category extends Model
         if(Auth::check()){
             $user_id = Auth::id();
             return $this->hasMany('App\Note', 'category_id', 'id')->where('user_id', $user_id);
+        } else {
+            return $this->hasMany('App\Note', 'category_id', 'id');
         };
     }
 }
