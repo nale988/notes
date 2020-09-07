@@ -14,7 +14,7 @@
     <div class="form-row">
         <div class="col-10">
             <div class="form-group">
-                <select class="form-control" name="category" id="category">
+                <select class="form-control form-control-sm" name="category" id="category">
                     @foreach($categories as $category)
                         <option value="{{ $category -> id }}">{{ $category -> description }}</option>
                     @endforeach
