@@ -98,7 +98,9 @@ class HomeController extends Controller
     public function version($id){
         $note = Version::where('id', $id)->with('category')->first();
         $versions = Version::where('note_id', $note -> note_id)->get();
-        return view('showversion', compact('note', 'versions'));
+        
+        $ismobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('!(tablet|pad|mobile|phone|symbian|android|ipod|ios|blackberry|webos)!i', $_SERVER['HTTP_USER_AGENT']) ? 1 : 0;
+        return view('showversion', compact('note', 'versions', 'ismobile'));
     }
 
     public function show($id){
@@ -106,7 +108,9 @@ class HomeController extends Controller
         $versions = Version::where('note_id', $id)->get();
         // print_r(json_encode($versions));
         // die;
-        return view('show', compact('note', 'versions'));
+        $ismobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('!(tablet|pad|mobile|phone|symbian|android|ipod|ios|blackberry|webos)!i', $_SERVER['HTTP_USER_AGENT']) ? 1 : 0;
+
+        return view('show', compact('note', 'versions', 'ismobile'));
     }
 
     public function edit($id){
