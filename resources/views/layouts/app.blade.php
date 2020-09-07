@@ -145,7 +145,7 @@
                 @else
                 <div class="row">
                     @auth
-                    <div class="col-2">
+                    <div class="col-3">
                         @include('sidebar')
                     </div>
                     @endauth
