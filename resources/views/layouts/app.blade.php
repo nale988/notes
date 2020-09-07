@@ -149,7 +149,7 @@
                         @include('sidebar')
                     </div>
                     @endauth
-                    <div class="col ml-4">
+                    <div class="col-9 ml-4">
                         @yield('content')
                     </div>
                 </div>
