@@ -13,7 +13,7 @@
             </a>
         </span>
     </div>
-    {-- <div class="card-body"><span class="flex-nowrap"{!! $note -> note !!}</span></div> --}
+    {{-- <div class="card-body"><span class="flex-nowrap"{!! $note -> note !!}</span></div> --}}
     <div class="card-body"><text area rows=8>{!! $note -> note !!}</textarea>
     <div class="card-footer bg-primary text-white">
         <div class="row">
