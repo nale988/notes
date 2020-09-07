@@ -13,7 +13,7 @@
             </a>
         </span>
     </div>
-    <div class="card-body"><pre>{!! $note -> note !!}</pre></div>
+    <div class="card-body"><pre class="pre-scrollable">{!! $note -> note !!}</pre></div>
     <div class="card-footer bg-primary text-white">
         <div class="row">
             <div class="col">
