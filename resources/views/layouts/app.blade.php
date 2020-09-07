@@ -128,6 +128,19 @@
                     </div>
                 </div>
                 @endif
+
+                @if($isMobile)
+                <div class="row">
+                    <div class="col">
+                        @include('sidebar')
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mt-4">
+                        @yield('content')
+                    </div>
+                </div>
+                @else
                 <div class="row">
                     <div class="col">
                         @include('sidebar')
@@ -136,6 +149,7 @@
                         @yield('content')
                     </div>
                 </div>
+                @endif
             </div>
         </main>
     </div>
