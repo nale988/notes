@@ -25,14 +25,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function ($view){
-            if(Auth::check()){
-                $user_id = Auth::id();
-                $categories = Category::with('notes')->get()->sortBy('description');
-                
-                $ismobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('!(tablet|pad|mobile|phone|symbian|android|ipod|ios|blackberry|webos)!i', $_SERVER['HTTP_USER_AGENT']) ? 1 : 0;
-
-                $view->with(['categories' => $categories, 'ismobile' => $ismobile]);
-            }
+            $ismobile = isset($_SERVER['HTTP_USER_AGENT']) && preg_match('!(tablet|pad|mobile|phone|symbian|android|ipod|ios|blackberry|webos)!i', $_SERVER['HTTP_USER_AGENT']) ? 1 : 0;
+            $categories = Category::with('notes')->get()->sortBy('description');
+            $view->with(['categories' => $categories, 'ismobile' => $ismobile]);
         });
     }
 }
