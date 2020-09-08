@@ -26,8 +26,6 @@ class HomeController extends Controller
 
     public function savenote(Request $request)
     {
-        // print_r(json_encode($request->all()));
-        // die;
         if(Auth::check()){
             $user_id = Auth::id();
             $request -> validate(['title' => 'required']);
@@ -57,8 +55,6 @@ class HomeController extends Controller
 
     public function update(Request $request)
     {
-        // print_r(json_encode($request->all()));
-        // die;
         if(Auth::check()){
             $user_id = Auth::id();
             $request -> validate(['title' => 'required']);
@@ -72,9 +68,6 @@ class HomeController extends Controller
             $note -> save();
 
             $lastversion = Version::where('note_id', $request->get('note_id'))->latest()->first();
-
-            // dump($lastversion->version);
-            // die;
 
             if(!empty($lastversion)){
                 $version_value = ++$lastversion -> version;
@@ -97,18 +90,20 @@ class HomeController extends Controller
 
     public function version($id){
         $note = Version::where('id', $id)->with('category')->first();
-        $versions = Version::where('note_id', $note -> note_id)->get();
-        
-        return view('showversion', compact('note', 'versions'));
-    }
+    public function show($id, $type){
+        if($type == 1){
+            $note=Note::where('id', $id)->with('category')->first();
+            $versions = Version::where('note_id', $id)->get()->sortBy('version');
 
-    public function show($id){
-        $note=Note::where('id', $id)->with('category')->first();
-        $versions = Version::where('note_id', $id)->get();
-        // print_r(json_encode($versions));
+        } else {
+            $note = Version::where('id', $id)->with('category')->first();
+            $versions = Version::where('note_id', $note -> note_id)->get()->sortBy('version');
+        }
+
+        // print_r(json_encode($note));
         // die;
 
-        return view('show', compact('note', 'versions'));
+        return view('show', compact('note', 'versions', 'type'));
     }
 
     public function edit($id){

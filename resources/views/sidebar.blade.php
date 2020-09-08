@@ -14,7 +14,7 @@
         <ul class="list-unstyled">
         @foreach($category -> notes as $note)
             <li>
-                <a class="btn btn-link" href="{{ route('show', $note -> id) }}" >
+                <a class="btn btn-link" href="{{ route('show', [$note -> id, 1]) }}" >
                     {{ $note -> title }}
                 </a>
             </li>

@@ -162,17 +162,17 @@
 $(document).ready(function() {
     $('#summernote').summernote({
         height: 300,                 // set editor height
-        minHeight: null,             // set minimum height of editor
+        minHeight: 200,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
         focus: true,                 // set focus to editable area after initializing summernote
+        lineHeights: ['0.8', '0.9', '1.0', '1.2', '1.4', '2.0', '3.0', '4.0'],
         toolbar: [
             // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['style', ['bold', 'italic', 'underline', 'clear', 'height']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
             ['insert', ['link', 'picture', 'table']],
             ['view', ['fullscreen', 'codeview', 'help']]
         ],
