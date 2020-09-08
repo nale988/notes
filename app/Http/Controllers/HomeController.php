@@ -44,7 +44,7 @@ class HomeController extends Controller
 
             $version -> save();
 
-            return redirect() -> back() -> with('message', 'Sačuvano!');
+            return redirect('home/show/'.$note_id.'/1')->with('message', 'Sačuvana nova stavka!');
         }
     }
 
@@ -85,7 +85,7 @@ class HomeController extends Controller
             ]);
 
             $version -> save();
-            return redirect() -> back() -> with('message', 'Sačuvano!');
+            return redirect('home/show/'.$request->get('note_id').'/1')->with('message', 'Sačuvana izmjena!');
         }
     }
 
