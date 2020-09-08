@@ -88,8 +88,6 @@ class HomeController extends Controller
         }
     }
 
-    public function version($id){
-        $note = Version::where('id', $id)->with('category')->first();
     public function show($id, $type){
         if($type == 1){
             $note=Note::where('id', $id)->with('category')->first();
