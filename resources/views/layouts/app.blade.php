@@ -172,11 +172,9 @@ $(document).ready(function() {
             ['fontsize', ['fontsize']],
             ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']]
-            ['table', ['table']],
-            ['insert', ['link']],
-            ['view', ['fullscreen', 'codeview', 'help']],
-            ['height', ['height']]
+            ['height', ['height']],
+            ['insert', ['link', 'picture', 'table']],
+            ['view', ['fullscreen', 'codeview', 'help']]
         ],
     });
 });
