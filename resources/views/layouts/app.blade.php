@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
     <!-- include libraries(jQuery, bootstrap) -->
@@ -58,7 +60,8 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                    {{-- {{ Auth::user()->name }} --}}
+                                    {{ substr(explode(" ", Auth::user()->name)[0], 0, 1) }}{{ substr(explode(" ", Auth::user()->name)[1], 0, 1) }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -129,31 +132,14 @@
                 </div>
                 @endif
 
-                @if($ismobile)
-                @auth
                 <div class="row">
-                    <div class="col">
+                    <div class="col-sm-12 col-md-4 mt-3">
                         @include('sidebar')
                     </div>
-                </div>
-                @endauth
-                <div class="row">
-                    <div class="col mt-4">
+                    <div class="col-sm-12 col-md-8 mt-3">
                         @yield('content')
                     </div>
                 </div>
-                @else
-                <div class="row">
-                    @auth
-                    <div class="col-3">
-                        @include('sidebar')
-                    </div>
-                    @endauth
-                    <div class="col-9">
-                        @yield('content')
-                    </div>
-                </div>
-                @endif
             </div>
         </main>
     </div>

@@ -16,7 +16,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index');
-Route::get('home/edit/{id}', 'HomeController@edit')->name('edit');
+Route::get('home/edit/{id}/{type}', 'HomeController@edit')->name('edit');
 Route::get('home/show/{id}/{type}', 'HomeController@show')->name('show');
 
 Route::post('home/update', 'HomeController@update')->name('update');

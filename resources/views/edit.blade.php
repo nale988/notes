@@ -4,6 +4,7 @@
 <form action="{{ route('update') }}" method="POST">
     @csrf
     <input type="hidden" name="note_id" value="{{ $note -> id }}" />
+    <input type="hidden" name="type" value="{{$type}}" />
     <div class="row">
         <div class="form-group col-6">
         <input type="text" class="form-control" name="title" value="{{ $note -> title }}" />
@@ -17,7 +18,7 @@
             <div class="form-group">
                 <select class="form-control" name="category" id="category">
                     @foreach($categories as $category)
-                        <option value="{{ $category -> id }}" {{ $note->id == $category->id ? 'selected':'' }}>{{ $category -> description }}</option>
+                        <option value="{{ $category -> id }}" {{ $note -> category_id == $category->id ? 'selected':'' }}>{{ $category -> description }}</option>
                     @endforeach
                 </select>
             </div>
