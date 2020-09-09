@@ -14,8 +14,12 @@
         <ul class="list-unstyled">
         @foreach($category -> notes as $note)
             <li>
-                <a class="btn btn-link" href="{{ route('show', [$note -> id, 1]) }}" >
-                    {{ $note -> title }}
+                <a class="btn btn-link text-left" href="{{ route('show', [$note -> id, 1]) }}" title="{{ $note -> title }}">
+                    @if(strlen($note -> title) > 20)
+                        {{ substr($note -> title, 0, 20) }}...
+                    @else
+                        {{ $note -> title}}
+                    @endif
                 </a>
             </li>
         @endforeach

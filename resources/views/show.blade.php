@@ -20,7 +20,7 @@
                 <small>{{ $note -> category -> description }}</small>
             </div>
             <div class="col text-right">
-                Ver:
+                <small>Ver:&nbsp;</small>
                 @if($type == 1)
                 @foreach($versions as $version)
                     @if($loop->last)
