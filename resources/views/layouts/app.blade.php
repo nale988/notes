@@ -154,7 +154,7 @@
 $(document).ready(function() {
     $('#summernote').summernote({
         addclass: {
-            debug: false,
+            debug: true,
             classTags: [{title:"Button","value":"btn btn-success"},"jumbotron", "lead","img-rounded","img-circle", "img-responsive","btn", "btn btn-success","btn btn-danger","text-muted", "text-primary", "text-warning", "text-danger", "text-success", "table-bordered", "table-responsive", "alert", "alert alert-success", "alert alert-info", "alert alert-warning", "alert alert-danger", "visible-sm", "hidden-xs", "hidden-md", "hidden-lg", "hidden-print"]
         },
         height: 300,                 // set editor height
