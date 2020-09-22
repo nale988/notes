@@ -164,7 +164,7 @@ $(document).ready(function() {
         lineHeights: ['0.8', '0.9', '1.0', '1.2', '1.4', '2.0', '3.0', '4.0'],
         toolbar: [
             // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear', 'height', 'hr']],
+            ['style', ['bold', 'italic', 'underline', 'clear', 'height', 'hr', 'addclass', 'clear']],
             ['font', ['strikethrough', 'superscript', 'subscript']],
             ['fontsize', ['fontsize']],
             ['color', ['color']],
