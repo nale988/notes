@@ -4,7 +4,7 @@
     <div class="card-header bg-light">
         <span class="float-left"><strong>{{ $note -> title }}</strong> </span>
         <span class="float-right">
-            <small>{{ date('d. m. Y. H:i', strtotime($note -> created_at)) }}</small>&nbsp;&nbsp;&nbsp;
+            <small>{{ date('d. m. Y. H:i', strtotime($note -> updated_at)) }}</small>&nbsp;&nbsp;&nbsp;
             <a href="{{ route('edit', [$note -> id, $type])}}">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-down-right" fill="black" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5z"/>
@@ -17,7 +17,11 @@
     <div class="card-footer bg-light">
         <div class="row">
             <div class="col">
-                <small>{{ $note -> category -> description }}</small>
+                @foreach($note_tags as $tag)
+                    <span class="badge badge-pill badge-primary">{{ $tag -> tag }}</span>
+                @endforeach
+            </div>
+            <div class="col">
             </div>
             <div class="col text-right">
                 <small>Ver:&nbsp;</small>

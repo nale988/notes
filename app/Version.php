@@ -17,4 +17,8 @@ class Version extends Model
     public function category(){
         return $this->belongsTo('App\Category', 'category_id', 'id');
     }
+
+    public function tags(){
+        return $this->belongsToMany('App\Tag', 'tag_connections','note_id', 'note_id');
+    }
 }
