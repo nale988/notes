@@ -6,26 +6,19 @@
     <input type="hidden" name="note_id" value="{{ $note -> id }}" />
     <input type="hidden" name="type" value="{{$type}}" />
     <div class="row">
-        <div class="form-group col-6">
+        <div class="form-group col-12">
         <input type="text" class="form-control" name="title" value="{{ $note -> title }}" />
         </div>
     </div>
     <div class="my-2">
         <textarea id="summernote" name="editordata">{!! $note -> note !!}</textarea>
     </div>
-    <div class="form-row">
-        <div class="col-3">
-            <div class="form-group">
-                <select class="form-control" name="category" id="category">
-                    @foreach($categories as $category)
-                        <option value="{{ $category -> id }}" {{ $note -> category_id == $category->id ? 'selected':'' }}>{{ $category -> description }}</option>
-                    @endforeach
-                </select>
-            </div>
+    <div class="form-row mt-3">
+        <div class="col-sm-8 col-md-6">
+            <input type="text" class="form-control form-control-sm" name="tags" value="{{ $tags_string }}">
         </div>
-        <div class="col"></div>
-        <div class="col-1">
-            <button class="btn btn-primary" type="submit">Sačuvaj</button>
+        <div class="col-sm">
+            <button class="btn btn-primary btn-sm float-right" type="submit">Sačuvaj</button>
         </div>
     </div>
 </form>

@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User;
 use App\Category;
 use App\Note;
 use App\Version;
+use App\Tag;
+use App\TagConnection;
 
 class HomeController extends Controller
 {
@@ -16,8 +18,7 @@ class HomeController extends Controller
     }
 
     public function index(){
-        $categories = Category::all();
-        return view('main', compact('categories'));
+        return view('main');
     }
 
     public function savenote(Request $request){
@@ -28,17 +29,54 @@ class HomeController extends Controller
                 'user_id' => $user_id,
                 'title' => $request -> get('title'),
                 'note' => $request -> get('editordata'),
-                'category_id' => $request -> get('category')
             ]);
 
             $note -> save();
             $note_id = $note -> id;
 
+            //tags
+            if(!empty($request -> get('tags'))){
+                $tags = explode(' ', $request -> get('tags'));
+                foreach($tags as $tag){
+                    $tag_id = Tag::where('tag', $tag)->first();
+                    if(!empty($tag_id -> id)){
+                        $tag_connection = new TagConnection([
+                            'tag_id' => $tag_id -> id,
+                            'note_id' => $note_id,
+                        ]);
+
+                        $tag_connection -> save();
+
+                    } else {
+                        $tag_insert = new Tag([
+                            'tag' => $tag
+                        ]);
+                        $tag_insert -> save();
+
+                        $tag_connection = new TagConnection([
+                            'tag_id' => $tag_insert -> id,
+                            'note_id' => $note_id,
+                        ]);
+
+                        $tag_connection -> save();
+                    };
+                };
+            } else {
+                $tag_id = Tag::where('tag', '#not_tagged')->first();
+                $tag_connection = new TagConnection([
+                    'tag_id' => $tag_id -> id,
+                    'note_id' => $note_id,
+                ]);
+
+                $tag_connection -> save();
+            }
+
+
+            // version
             $version = new Version([
                 'note_id' => $note_id,
                 'title' => $request -> get('title'),
                 'note' => $request -> get('editordata'),
-                'category_id' => $request -> get('category'),
                 'version' => 1
             ]);
 
@@ -50,7 +88,6 @@ class HomeController extends Controller
 
     public function update(Request $request){
         if(Auth::check()){
-            $user_id = Auth::id();
             $type = $request -> get('type');
             $request -> validate(['title' => 'required']);
             $category_id = $request -> get('category');
@@ -66,9 +103,9 @@ class HomeController extends Controller
 
             $note -> title = $request -> get('title');
             $note -> note = $request -> get('editordata');
-            $note -> category_id = $category_id;
 
             $note -> save();
+            $note_id = $note -> id;
 
             if(!empty($lastversion)){
                 $version_value = ++$lastversion -> version;
@@ -80,43 +117,91 @@ class HomeController extends Controller
                 'note_id' => $lastversion -> note_id,
                 'title' => $request -> get('title'),
                 'note' => $request -> get('editordata'),
-                'category_id' => $category_id,
                 'version' => $version_value
             ]);
 
             $version -> save();
+
+            //tags
+            $old_tags = TagConnection::where('note_id', $note_id)->get();
+            foreach($old_tags as $tag){
+                $tag -> delete();
+            }
+
+            if(!empty($request -> get('tags'))){
+                $tags = explode(' ', $request -> get('tags'));
+                foreach($tags as $tag){
+                    $tag_id = Tag::where('tag', $tag)->first();
+                    if(!empty($tag_id -> id)){
+                        $tag_connection = new TagConnection([
+                            'tag_id' => $tag_id -> id,
+                            'note_id' => $note_id,
+                        ]);
+
+                        $tag_connection -> save();
+
+                    } else {
+                        $tag_insert = new Tag([
+                            'tag' => $tag
+                        ]);
+                        $tag_insert -> save();
+
+                        $tag_connection = new TagConnection([
+                            'tag_id' => $tag_insert -> id,
+                            'note_id' => $note_id,
+                        ]);
+
+                        $tag_connection -> save();
+                    };
+                };
+            } else {
+                $tag_id = Tag::where('tag', '#not_tagged')->first();
+                $tag_connection = new TagConnection([
+                    'tag_id' => $tag_id -> id,
+                    'note_id' => $note_id,
+                ]);
+
+                $tag_connection -> save();
+            }
+
             return redirect('home/show/'.$request->get('note_id').'/1')->with('message', 'Sačuvana izmjena!');
         }
     }
 
     public function show($id, $type){
         if($type == 1){
-            $note=Note::where('id', $id)->with('category')->first();
+            $note=Note::where('id', $id)->with('tags')->first();
             $versions = Version::where('note_id', $id)->get()->sortBy('version');
-
+            $note_tags = TagConnection::where('note_id', $note -> id)
+                ->leftJoin('tags','tags.id', '=', 'tag_connections.tag_id')
+                ->get(['tag']);
         } else {
-            $note = Version::where('id', $id)->with('category')->first();
+            $note = Version::where('id', $id)->with('tags')->first();
             $versions = Version::where('note_id', $note -> note_id)->get()->sortBy('version');
+            $note_tags = TagConnection::where('note_id', $note -> note_id)
+            ->leftJoin('tags','tags.id', '=', 'tag_connections.tag_id')
+            ->get(['tag']);
         }
 
-        // print_r(json_encode($note));
-        // die;
-
-        return view('show', compact('note', 'versions', 'type'));
+        return view('show', compact('note', 'versions', 'type', 'note_tags'));
     }
 
     public function edit($id, $type){
-        $categories = Category::all();
-
         if($type == 1){
-            $note=Note::where('id', $id)->first();
+            $note=Note::where('id', $id)->with('tags')->first();
+            $note_tags = TagConnection::where('note_id', $note -> id)
+            ->leftJoin('tags','tags.id', '=', 'tag_connections.tag_id')
+            ->get(['tag']);
+
         } else {
-            $note=Version::where('id', $id)->first();
+            $note=Version::where('id', $id)->with('tags')->first();
+            $note_tags = TagConnection::where('note_id', $note -> note_id)
+            ->leftJoin('tags','tags.id', '=', 'tag_connections.tag_id')
+            ->get(['tag']);
         }
 
-        // print_r(json_encode($note));
-        // die;
+        $tags_string = $note_tags -> implode('tag', ' ');
 
-        return view('edit', compact('note', 'categories', 'type'));
+        return view('edit', compact('note', 'type', 'tags_string'));
     }
 }

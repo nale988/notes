@@ -140,7 +140,8 @@
 
                 <div class="row">
                     <div class="col-sm-12 col-md-3 mt-3">
-                        @include('sidebar')
+                        {{-- @include('sidebar') --}}
+                        @include('sidebartags')
                     </div>
                     <div class="col-sm-12 col-md-9 mt-3">
                         @yield('content')
@@ -166,12 +167,13 @@ $(document).ready(function() {
         lineHeights: ['0.8', '0.9', '1.0', '1.2', '1.4', '2.0', '3.0', '4.0'],
         toolbar: [
             // [groupName, [list of button]]
-            ['style', ['bold', 'italic', 'underline', 'clear', 'height', 'hr', 'addclass']],
-            ['font', ['strikethrough', 'superscript', 'subscript', 'fontsize']],
+            //['style', ['bold', 'italic', 'underline', 'clear', 'height', 'hr', 'addclass']],
             ['color', ['color']],
+            ['style', ['hr', 'addclass']],
+            ['font', ['strikethrough', 'superscript', 'subscript', 'fontsize']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'picture', 'table']],
-            ['view', ['fullscreen', 'codeview', 'help']]
+            ['view', ['fullscreen', 'codeview']]
         ],
     });
 });
