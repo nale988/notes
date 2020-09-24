@@ -1,7 +1,7 @@
 <ul class="list-group">
     @foreach($tags as $tag)
     @if(count($tag -> notes) > 0)
-    <li class="list-group-item">
+    <li class="list-group-item list-group-item-action">
         <div class="d-flex justify-content-between align-items-center">
             <a class="dropdown-toggle" data-toggle="collapse" style="text-decoration: none; color: #000;" href="#c{{ preg_replace('/[^a-z0-9.]+/i', '-', $tag -> tag) }}" role="button" aria-expanded="false" aria-controls="c{{ preg_replace('/[^a-z0-9.]+/i', '-', $tag -> tag) }}">
                 {{ $tag -> tag }}
