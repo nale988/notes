@@ -141,7 +141,7 @@
                 <div class="row">
                     <div class="col-sm-12 col-md-3 mt-3">
                         {{-- @include('sidebar') --}}
-                        @include('sidebartags')
+                        @include('sidebar')
                     </div>
                     <div class="col-sm-12 col-md-9 mt-3">
                         @yield('content')
