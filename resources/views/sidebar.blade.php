@@ -13,7 +13,7 @@
             <ul class="list-unstyled">
                 @foreach($tag -> notes as $note)
                 <li>
-                    <a class="badge badge-primary" href="{{ route('show', [$note -> id, 1]) }}" title="{{ $note -> title }}">
+                    <a class="btn btn-sm btn-primary btn-block p-1 m-1" href="{{ route('show', [$note -> id, 1]) }}" title="{{ $note -> title }}">
                         {{-- @if(strlen($note -> title) > 20)
                         {{ substr($note -> title, 0, 20) }}...
                         @else
