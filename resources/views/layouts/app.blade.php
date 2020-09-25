@@ -139,10 +139,10 @@
                 @endif
 
                 <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-4 mt-3">
+                    <div class="col-sm-12 col-md-3 mt-3">
                         @include('sidebar')
                     </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-8 mt-3">
+                    <div class="col-sm-12 col-md-9 mt-3">
                         @yield('content')
                     </div>
                 </div>
