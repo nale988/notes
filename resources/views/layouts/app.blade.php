@@ -139,11 +139,10 @@
                 @endif
 
                 <div class="row">
-                    <div class="col-sm-12 col-md-3 col-lg-3 mt-3">
-                        {{-- @include('sidebar') --}}
+                    <div class="col-sm-12 col-md-3 col-lg-3 col-xl-4 mt-3">
                         @include('sidebar')
                     </div>
-                    <div class="col-sm-12 col-md-9 col-lg-9 mt-3">
+                    <div class="col-sm-12 col-md-9 col-lg-9 col-xl-8 mt-3">
                         @yield('content')
                     </div>
                 </div>
@@ -156,8 +155,6 @@ $(document).ready(function() {
     $('#summernote').summernote({
         addclass: {
             debug: false,
-            //classTags: [{title:"Button","value":"btn btn-success"},"jumbotron", "lead","img-rounded","img-circle", "img-responsive","btn", "btn btn-success","btn btn-danger","text-muted", "text-primary", "text-warning", "text-danger", "text-success", "table-bordered", "table-responsive", "alert", "alert alert-success", "alert alert-info", "alert alert-warning", "alert alert-danger", "visible-sm", "hidden-xs", "hidden-md", "hidden-lg", "hidden-print"]
-            //classTags: [{title: "Text success", value: "text-success"}, {title: "Text primary", value: "text-primary"}, {title: "Text info", value: "text-info"}, {title: "Text danger", value: "text-danger"}, {title: "Text muted", value: "text-muted"}, {title: "Alert primary", value: "alert alert-primary"}, {title: "Alert success", value: "alert alert-success"}, {title: "Alert danger", value: "alert alert-danger"}, {title: "Alert info", value: "alert alert-info"}, {title: "Justified", value: "text-jusitfy"}, {title: "Monospace", value: "text-monospace"}, {title: "Border", value: "border"}, {title: "Border primary", value: "border border-primary"}, {title: "Border danger", value: "border-danger"}, {title: "Sticky top", value: "sticky-top"}, {title: "Small shadow", value: "shadow-sm p-3 mb-5 bg-white rounded"}, {title: "Regular shaddow", value: "shadow p-3 mb-5 bg-white rounded"}, {title: "Larger shaddow", value: "shadow-lg p-3 mb-5 bg-white rounded"}],
             classTags: ["text-success", "text-primary", "text-info", "text-danger", "text-muted", "alert alert-primary", "alert alert-success", "alert alert-danger", "alert alert-info", "text-jusitfy", "text-monospace", "border", "border border-primary", "border border-danger", "sticky-top", "shadow-sm p-3 mb-5 bg-white rounded", "shadow p-3 mb-5 bg-white rounded", "shadow-lg p-3 mb-5 bg-white rounded"]
         },
         height: 300,                 // set editor height
