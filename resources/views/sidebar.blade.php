@@ -12,9 +12,11 @@
             <ul class="list-unstyled">
                 @foreach($favorites as $note)
                 <li>
+@isset($note -> notes -> id)
                     <a class="btn btn-link" style="color: #000;" href="{{ route('show', [$note -> notes -> id, 1]) }}" title="{{ $note -> title }}">
                         <span class="text-truncate ">{{ $note -> notes -> title}}</span>
                     </a>
+@endisset
                 </li>
                 @endforeach
             </ul>
