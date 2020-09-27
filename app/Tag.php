@@ -14,9 +14,9 @@ class Tag extends Model
     public function notes(){
         if(Auth::check()){
             $user_id = Auth::id();
-            return $this->belongsToMany('App\Note', 'tag_connections')->where('user_id', $user_id);
+            return $this->belongsToMany('App\Note', 'tag_connections')->where('user_id', $user_id)->orderBy('title');
         } else {
-            return $this->belongsToMany('App\Note', 'tag_connections')->where('user_id', 0);
+            return $this->belongsToMany('App\Note', 'tag_connections')->where('user_id', 0)->orderBy('title');
         };
     }
 }
