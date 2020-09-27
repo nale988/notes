@@ -21,3 +21,4 @@ Route::get('home/show/{id}/{type}', 'HomeController@show')->name('show');
 
 Route::post('home/update', 'HomeController@update')->name('update');
 Route::post('savenote', 'HomeController@savenote')->name('savenote');
+Route::get('favorite/{id}', 'HomeController@favorite')->name('favorite');

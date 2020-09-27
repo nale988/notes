@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User;
 
 use App\Category;
 use App\Note;
+use App\Favorite;
 use App\Version;
 use App\Tag;
 use App\TagConnection;
@@ -19,6 +20,25 @@ class HomeController extends Controller
 
     public function index(){
         return view('main');
+    }
+
+    public function favorite($id){
+        $user = Auth::user();
+        $favorite = Favorite::where('note_id', $id)->first();
+
+        if(!empty($favorite)){
+            $favorite -> delete();
+            return redirect()->back()->with('alert', 'Uklonjeno iz omiljenih!');
+        }
+        else{
+            $add = new Favorite([
+                'user_id' => $user -> id,
+                'note_id' => $id,
+            ]);
+
+            $add -> save();
+            return redirect()->back()->with('message', 'Dodana u omiljene!');
+        }
     }
 
     public function savenote(Request $request){
@@ -183,7 +203,9 @@ class HomeController extends Controller
             ->get(['tag']);
         }
 
-        return view('show', compact('note', 'versions', 'type', 'note_tags'));
+        $favorite = Favorite::where('note_id', $id)->first();
+
+        return view('show', compact('note', 'versions', 'type', 'note_tags', 'favorite'));
     }
 
     public function edit($id, $type){
@@ -201,7 +223,7 @@ class HomeController extends Controller
         }
 
         $tags_string = $note_tags -> implode('tag', ' ');
-
+        
         return view('edit', compact('note', 'type', 'tags_string'));
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User;
 
 use App\Note;
 use App\Category;
+use App\Favorite;
 use App\Tag;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,7 +23,8 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view){
             $tags = Tag::with('notes')->get()->sortBy('tag');
-            $view->with(['tags' => $tags]);
+            $favorites = Favorite::with('notes')->get();
+            $view->with(['tags' => $tags, 'favorites' => $favorites]);
         });
     }
 }
