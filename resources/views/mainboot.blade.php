@@ -8,7 +8,7 @@
             <input type="text" class="form-control form-control-sm" name="title" placeholder="Naslov">
         </div>
     </div>
-    <div class="my-2">
+    <div class="my-2" style="z-index: -1">
         <textarea id="summernote" name="editordata"></textarea>
     </div>
     <div class="form-row">
