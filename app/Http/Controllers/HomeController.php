@@ -23,6 +23,9 @@ class HomeController extends Controller
     }
 
     public function savenote(Request $request){
+        print_r(json_encode($request->all()));
+        die;
+
         if(Auth::check()){
             $user_id = Auth::id();
             $request -> validate(['title' => 'required']);
