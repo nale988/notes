@@ -19,6 +19,11 @@
     <div class="form-row">
         <div class="col-sm-10">
             <input type="text" class="form-control form-control-sm" name="tags" value="{{ $tags_string }}">
+            <small id="tags" class="form-text text-muted">Posebne grupe:
+                <span class="badge badge-primary">#favorite</span>
+                <span class="badge badge-info">#todo</span>
+                <span class="badge badge-danger">#important</span>
+            </small>
         </div>
         <div class="col-sm-2">
             <button class="btn btn-primary btn-sm float-right" type="submit">Sačuvaj</button>
