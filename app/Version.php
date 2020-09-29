@@ -10,7 +10,7 @@ class Version extends Model
         'note_id',
         'title',
         'note',
-        'category_id',
+        'language',
         'version'
     ];
 

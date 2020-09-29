@@ -11,22 +11,29 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+    {{-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/styles/default.min.css"> --}}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.2/highlight.min.js"></script>
+
     <script src="{{ asset('js/summernote-ext-addclass.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Notes') }}</title>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 </head>
+
 <body>
     <div id="app">
         <div class="page-wrapper with-navbar with-sidebar">
         <nav class="navbar justify-content-between">
             <div class="navbar-content">
                 <div class="btn-group" role="group" aria-label="Basic example">
-                <button class="btn btn-action" type="button"  onclick="halfmoon.toggleSidebar()">
+                <button class="btn btn-action" type="button"  onclick="halfmoon.toggleSidebar()" data-placement="right" data-toggle="tooltip" data-title="Sakrij menu" data-target-breakpoint="md" >
                   <i class="fa fa-bars" aria-hidden="true"></i>
                   <span class="sr-only">Toggle sidebar</span> <!-- sr-only = show only on screen readers -->
                 </button>
-                <button class="btn btn-action ml-2" type="button" onclick="toggleDM()">
+                <button class="btn btn-action ml-2" type="button" onclick="toggleDM()" data-placement="right" data-toggle="tooltip" data-title="Tamni mod" data-target-breakpoint="md" >
                     <i class="fa fa-moon-o" aria-hidden="true"></i>
                     <span class="sr-only">Switch mode</span>
                 </button>
@@ -60,6 +67,7 @@
                         </form>
                     @endguest
                   <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ url('/') }}">Otvori novo</a>
                   <div class="dropdown-content">
                     <small class="float-right" title="Page reply speed">Page reply: {{ round(microtime(true) - LARAVEL_START, 2) }}s</small>
                   </div>
@@ -71,7 +79,9 @@
                 @include('sidebarhm')
             </div>
             <div class="content-wrapper">
+                <div class="container-fluid">
                 @yield('content')
+                </div>
             </div>
             @else
             <div class="content-wrapper">
@@ -109,10 +119,14 @@ $(document).ready(function() {
     });
 });
 </script>
+
 <script type="text/javascript">
     function toggleDM() {
       halfmoon.toggleDarkMode();
     }
-  </script>
+</script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
 </body>
 </html>

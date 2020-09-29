@@ -11,7 +11,7 @@
                 @elseif($tag -> tag === '#todo')
                     <span class="text-success"><strong>{{ $tag -> tag }}</strong></span>
                 @else
-                    <span class="text-dark">{{ $tag -> tag }}</span>
+                    <span>{{ $tag -> tag }}</span>
                 @endif
                 <span class="float-right badge badge-primary badge-pill">{{ count($tag -> notes)}}</span>
             </summary>

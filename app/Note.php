@@ -11,7 +11,7 @@ class Note extends Model
         'user_id',
         'title',
         'note',
-        'category_id'
+        'language',
     ];
 
     public function category(){

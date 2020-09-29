@@ -19,6 +19,7 @@ class CreateNotesTable extends Migration
             $table->string('title')->nullable()->index();
             $table->mediumText('note')->nullable()->index();
             $table->foreignId('category_id')->nullable()->references('id')->on('categories')->onDelete('cascade');
+            $table->string('language')->nullable();
             $table->timestamps();
         });
     }
