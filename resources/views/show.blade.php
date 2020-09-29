@@ -3,19 +3,21 @@
 <div class="card">
     <div class="card-header bg-light">
         <div class="row">
-            <div class="col-12">
-            <span class="float-left">
-                <strong>{{ $note -> title }}</strong>
-            </span>
-            <span class="float-right">
-                <small>{{ date('d. m. Y. H:i', strtotime($note -> updated_at)) }}</small>&nbsp;&nbsp;&nbsp;
-                <a href="{{ route('edit', [$note -> id, $type])}}">
-                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-down-right" fill="black" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M8.636 12.5a.5.5 0 0 1-.5.5H1.5A1.5 1.5 0 0 1 0 11.5v-10A1.5 1.5 0 0 1 1.5 0h10A1.5 1.5 0 0 1 13 1.5v6.636a.5.5 0 0 1-1 0V1.5a.5.5 0 0 0-.5-.5h-10a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h6.636a.5.5 0 0 1 .5.5z"/>
-                    <path fill-rule="evenodd" d="M16 15.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L6.146 6.854a.5.5 0 1 1 .708-.708L15 14.293V10.5a.5.5 0 0 1 1 0v5z"/>
-                </svg>
-                </a>
-            </span>
+            <div class="col">
+                <strong>{{ $note -> title }}</strong><small class="text-muted">&nbsp;&nbsp;{{ date('d. m. Y. H:i', strtotime($note -> updated_at)) }}</small>
+            </div>
+            <div class="col-2 text-right mr-3 pr-3">
+                <div class="dropdown">
+                    <a class="btn btn-light btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Opcije
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ route('edit', [$note -> id, $type])}}">Uredi</a>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" data-toggle="modal" data-target="#deleteOldVersions">Obriši stare verzije</button>
+                        <button class="dropdown-item" data-toggle="modal" data-target="#deleteNote">Obriši</button>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -26,9 +28,13 @@
             </div>
         </div>
     </div>
-    <div class="card-body"><pre class="pre-scrollable">{!! $note -> note !!}</pre></div>
+    <div class="card-body"><pre class="pre-scrollable"><code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre></div>
     <div class="card-footer bg-light">
         <div class="row">
+            <div class="col text-left">
+                <small class="text-muted">Jezik: <strong>{{ $note -> language }}</strong></small>
+
+            </div>
             <div class="col text-right">
                 <small>Ver:&nbsp;</small>
                 @if($type == 1)
@@ -56,6 +62,46 @@
                 @endif
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteNote" tabindex="-1" role="dialog" aria-labelledby="modalDeleteNote" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDeleteNoteTitle">Obrisati?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Potpuno obrisati: <strong>{{ $note -> title }}</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary btn-sm">Obriši</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteOldVersions" tabindex="-1" role="dialog" aria-labelledby="modalDeleteOldVersion" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalDeleteOldVersionsTitle">Obriši stare verzije</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            Pronađeno {{ count($versions)}} - obrisati ih?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary btn-sm">Obriši</button>
+        </div>
+      </div>
     </div>
 </div>
 @endsection

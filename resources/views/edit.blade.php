@@ -17,12 +17,23 @@
     </div>
 
     <div class="form-row">
-        <div class="col-sm-10">
+        <div class="col-sm-6">
             <input type="text" class="form-control form-control-sm" name="tags" value="{{ $tags_string }}">
             <small id="tags" class="form-text text-muted">Posebne grupe:
                 <span class="badge badge-primary">#favorite</span>
                 <span class="badge badge-info">#todo</span>
                 <span class="badge badge-danger">#important</span>
+            </small>
+        </div>
+        <div class="col-sm-4">
+            <input type="text" class="form-control form-control-sm" name="language" value="{{ $note -> language}}" >
+            <small id="tags" class="form-text text-muted">Primjeri:
+                <span class="badge badge-primary">nohighlight</span>
+                <span class="badge badge-primary">plaintext</span>
+                <span class="badge badge-primary">bash</span>
+                <span class="badge badge-primary">python</span>
+                <span class="badge badge-primary">asm</span>
+                <span class="badge badge-primary">html</span>
             </small>
         </div>
         <div class="col-sm-2">

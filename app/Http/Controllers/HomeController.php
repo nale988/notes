@@ -30,6 +30,7 @@ class HomeController extends Controller
                 'user_id' => $user_id,
                 'title' => $request -> get('title'),
                 'note' => $request -> get('editordata'),
+                'language' => $request ->get('language'),
             ]);
 
             $note -> save();
@@ -78,6 +79,7 @@ class HomeController extends Controller
                 'note_id' => $note_id,
                 'title' => $request -> get('title'),
                 'note' => $request -> get('editordata'),
+                'language' => $request -> get('language'),
                 'version' => 1
             ]);
 
@@ -104,6 +106,7 @@ class HomeController extends Controller
 
             $note -> title = $request -> get('title');
             $note -> note = $request -> get('editordata');
+            $note -> language = $request -> get('language');
 
             $note -> save();
             $note_id = $note -> id;
@@ -118,6 +121,7 @@ class HomeController extends Controller
                 'note_id' => $lastversion -> note_id,
                 'title' => $request -> get('title'),
                 'note' => $request -> get('editordata'),
+                'language' => $request -> get('language'),
                 'version' => $version_value
             ]);
 

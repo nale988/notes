@@ -18,7 +18,7 @@ class CreateVersionsTable extends Migration
             $table->foreignId('note_id')->nullable()->references('id')->on('notes')->onDelete('cascade');
             $table->string('title')->nullable()->index();
             $table->mediumText('note')->nullable()->index();
-            $table->foreignId('category_id')->nullable()->references('id')->on('categories')->onDelete('cascade');
+            $table->string('language')->default('plaintext')->nullable();
             $table->tinyInteger('version')->default(1)->nullable();
             $table->timestamps();
         });
