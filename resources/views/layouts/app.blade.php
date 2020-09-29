@@ -14,12 +14,9 @@
 
     <script src="{{ asset('js/summernote-ext-addclass.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Notes') }}</title>
-
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
 
-    <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
@@ -122,7 +119,7 @@
                     </div>
                 </div>
                 @endif
-
+                @auth
                 <div class="row">
                     <div class="col-sm-12 col-md-3 mt-3">
                         @include('sidebar')
@@ -131,6 +128,13 @@
                         @yield('content')
                     </div>
                 </div>
+                @else
+                <div class="row">
+                    <div class="col">
+                        @yield('content')
+                    </div>
+                </div>
+                @endauth
             </div>
         </main>
     </div>
