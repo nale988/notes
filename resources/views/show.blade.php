@@ -28,7 +28,14 @@
             </div>
         </div>
     </div>
-    <div class="card-body"><pre class="pre-scrollable"><code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre></div>
+    <div class="card-body">
+    <pre class="pre-scrollable">
+    @if($note -> language == 'none')
+    {!! $note -> note !!}
+    @else
+    <code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre>
+    @endif
+    </div>
     <div class="card-footer bg-light">
         <div class="row">
             <div class="col text-left">
