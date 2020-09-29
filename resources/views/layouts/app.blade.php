@@ -8,46 +8,38 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link href="https://cdn.jsdelivr.net/npm/halfmoon@1.1.0/css/halfmoon-variables.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
-    <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <!-- include libraries(jQuery, bootstrap) -->
-    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> --}}
-    {{-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> --}}
-    {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> --}}
-    <!-- include summernote css/js -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
     <script src="{{ asset('js/summernote-ext-addclass.js') }}"></script>
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{ config('app.name', 'Notes') }}</title>
-
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
-
-    <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 </head>
 <body>
-    {{-- <div class="page-wrapper with-navbar with-sidebar"> --}}
-        <div class="page-wrapper with-navbar with-sidebar" data-sidebar-type="overlayed-all">
-        <div class="sidebar-overlay" onclick="halfmoon.toggleSidebar()"></div>
+    <div id="app">
+        <div class="page-wrapper with-navbar with-sidebar">
         <nav class="navbar justify-content-between">
             <div class="navbar-content">
+                <div class="btn-group" role="group" aria-label="Basic example">
                 <button class="btn btn-action" type="button"  onclick="halfmoon.toggleSidebar()">
                   <i class="fa fa-bars" aria-hidden="true"></i>
                   <span class="sr-only">Toggle sidebar</span> <!-- sr-only = show only on screen readers -->
                 </button>
+                <button class="btn btn-action ml-2" type="button" onclick="toggleDM()">
+                    <i class="fa fa-moon-o" aria-hidden="true"></i>
+                    <span class="sr-only">Switch mode</span>
+                </button>
+                </div>
             </div>
             <a href="{{ url('/') }}" class="navbar-brand">
                 Notes
             </a>
-
             <div class="dropdown with-arrow">
                 <button class="btn" data-toggle="dropdown" type="button" id="navbar-dropdown-toggle-btn-1">
+                    @auth
                     {{ substr(explode(" ", Auth::user()->name)[0], 0, 1) }}{{ substr(explode(" ", Auth::user()->name)[1], 0, 1) }}
+                    @endauth
                   <i class="fa fa-angle-down" aria-hidden="true"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right w-200" aria-labelledby="navbar-dropdown-toggle-btn-1"> <!-- w-200 = width: 20rem (200px) -->
@@ -73,13 +65,21 @@
                   </div>
                 </div>
               </div>
-        </nav>
-        <!-- Sidebar (immediate child of the page wrapper) -->
-        <div class="sidebar">
-            @include('sidebarhm')
-        </div>
-        <div class="content-wrapper">
-            @yield('content')
+            </nav>
+            @auth
+            <div class="sidebar">
+                @include('sidebarhm')
+            </div>
+            <div class="content-wrapper">
+                @yield('content')
+            </div>
+            @else
+            <div class="content-wrapper">
+                <div class="content">
+                @yield('content')
+                </div>
+            </div>
+            @endauth
         </div>
     </div>
 
@@ -109,6 +109,10 @@ $(document).ready(function() {
     });
 });
 </script>
-
+<script type="text/javascript">
+    function toggleDM() {
+      halfmoon.toggleDarkMode();
+    }
+  </script>
 </body>
 </html>
