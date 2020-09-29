@@ -22,6 +22,42 @@ class HomeController extends Controller
         return view('main');
     }
 
+    public function deletenote($id){
+        $note = Note::where('id', $id)->first();
+        $note -> delete();
+
+        $versions = Version::where('note_id', $id)->get();
+        foreach($versions as $version){
+            $version -> delete();
+        }
+
+        $tags = TagConnection::where('note_id', $id)->get();
+        foreach($tags as $tag){
+            $tag -> delete();
+        }
+        return redirect('/')->with('message', 'Obrisano');
+    }
+
+    public function deleteoldversions($id){
+        $versions = Version::where('note_id', $id)->get();
+        foreach($versions as $version){
+            $version -> delete();
+        }
+
+        $note = Note::where('id', $id)->first();
+        $newversion = new Version([
+            'note_id' => $id,
+            'title' => $note -> title,
+            'note' => $note -> note,
+            'language' => $note -> language,
+            'version' => 1
+        ]);
+
+        $newversion -> save();
+
+        return redirect('home/show/'.$id.'/1')->with('message', 'Obrisane sve stare verzije!');
+    }
+
     public function savenote(Request $request){
         if(Auth::check()){
             $user_id = Auth::id();
@@ -199,8 +235,10 @@ class HomeController extends Controller
             ->get(['tag']);
 
         } else {
-            $note=Version::where('id', $id)->with('tags')->first();
-            $note_tags = TagConnection::where('note_id', $note -> note_id)
+            //$note=Version::where('id', $id)->with('tags')->first();
+            $version = Version::where('id', $id)->first();
+            $note = Note::where('id', $version -> note_id)->first();
+            $note_tags = TagConnection::where('note_id', $note -> id)
             ->leftJoin('tags','tags.id', '=', 'tag_connections.tag_id')
             ->get(['tag']);
         }

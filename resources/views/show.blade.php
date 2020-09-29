@@ -14,7 +14,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{{ route('edit', [$note -> id, $type])}}">Uredi</a>
                         <div class="dropdown-divider"></div>
-                        <button class="dropdown-item" data-toggle="modal" data-target="#deleteOldVersions">Obriši stare verzije</button>
+                        <button class="dropdown-item" data-toggle="modal" data-target="#deleteOldVersions" {{ count($versions) > 1 ? "" : "disabled" }}>Obriši stare verzije</button>
                         <button class="dropdown-item" data-toggle="modal" data-target="#deleteNote">Obriši</button>
                     </div>
                 </div>
@@ -37,12 +37,13 @@
             </div>
             <div class="col text-right">
                 <small>Ver:&nbsp;</small>
+                <div class="btn-group" role="group" aria-label="Verzije">
                 @if($type == 1)
                 @foreach($versions as $version)
                     @if($loop->last)
-                        <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-primary" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}">
+                        <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-primary" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}" data-toggle="tooltip" data-placement="left">
                     @else
-                        <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-light" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}">
+                        <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-light" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}"  data-toggle="tooltip" data-placement="left">
                     @endif
                         {{$version -> version}}
                     </a>
@@ -50,16 +51,17 @@
                 @else
                     @foreach($versions as $version)
                         @if($version -> id == $note -> id)
-                            <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-primary" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}">
+                            <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-primary" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}" data-toggle="tooltip" data-placement="left">
                                 {{$version -> version}}
                             </a>
                         @else
-                            <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-light" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}">
+                            <a href="{{ route('show', [$version -> id, 2]) }}" class="badge badge-light" title="{{ date('d. m. Y. H:i', strtotime($version -> created_at)) }}" data-toggle="tooltip" data-placement="left">
                                 {{$version -> version}}
                             </a>
                         @endif
                     @endforeach
                 @endif
+                </div>
             </div>
         </div>
     </div>
@@ -78,8 +80,12 @@
           Potpuno obrisati: <strong>{{ $note -> title }}</strong>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Zatvori</button>
-          <button type="button" class="btn btn-primary btn-sm">Obriši</button>
+          <a type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Zatvori</a>
+          @if($type==1)
+            <a href="{{ route('deletenote', $note -> id) }}" class="btn btn-primary btn-sm">Obriši</a>
+          @else
+            <a href="{{ route('deletenote', $note -> note_id) }}" class="btn btn-primary btn-sm">Obriši</a>
+          @endif
         </div>
       </div>
     </div>
@@ -98,8 +104,12 @@
             Pronađeno {{ count($versions)}} - obrisati ih?
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Zatvori</button>
-          <button type="button" class="btn btn-primary btn-sm">Obriši</button>
+            <a type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Zatvori</a>
+            @if($type == 1)
+                <a type="button" href="{{ route('deleteoldversions', $note -> id) }}" class="btn btn-primary btn-sm">Obriši</a>
+            @else
+                <a type="button" href="{{ route('deleteoldversions', $note -> note_id) }}" class="btn btn-primary btn-sm">Obriši</a>
+            @endif
         </div>
       </div>
     </div>
