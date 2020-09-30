@@ -30,17 +30,16 @@
     </div>
     <div class="card-body">
     <pre class="pre-scrollable">
-    @if($note -> language == 'none')
-    {!! $note -> note !!}
-    @else
-    <code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre>
-    @endif
+        @if($note -> language == 'none' || $note -> language == 'nothing' || $note -> language == 'plaintext')
+            {!! $note -> note !!}
+        @else
+            <code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre>
+        @endif
     </div>
     <div class="card-footer bg-light">
         <div class="row">
             <div class="col text-left">
                 <small class="text-muted">Jezik: <strong>{{ $note -> language }}</strong></small>
-
             </div>
             <div class="col text-right">
                 <small>Ver:&nbsp;</small>
