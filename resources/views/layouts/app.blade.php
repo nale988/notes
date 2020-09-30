@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md sticky-top navbar-light bg-white shadow-sm">
             <div class="container">
                 <button type="button" id="closeSidebarButton" class="btn btn-light btn-sm pr-2 mr-2">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -132,7 +132,7 @@
                     <div class="col-sm-12 col-md-3 mt-3" id="sidebar">
                         @include('sidebar')
                     </div>
-                    <div class="col mt-3">
+                    <div class="col-sm-12 col-md-9 mt-3" id="maincontent">
                         @yield('content')
                     </div>
                 </div>
@@ -154,13 +154,11 @@ $(document).ready(function() {
             debug: false,
             classTags: ["text-success", "text-primary", "text-info", "text-danger", "text-muted", "alert alert-primary", "alert alert-success", "alert alert-danger", "alert alert-info", "text-jusitfy", "text-monospace", "border", "border border-primary", "border border-danger", "sticky-top", "shadow-sm p-3 mb-5 bg-white rounded", "shadow p-3 mb-5 bg-white rounded", "shadow-lg p-3 mb-5 bg-white rounded"]
         },
-        minHeight: 500,             // set minimum height of editor
-        maxHeight: null,             // set maximum height of editor
-        focus: true,                 // set focus to editable area after initializing summernote
+        minHeight: 500,
+        maxHeight: null,
+        focus: true,
         lineHeights: ['0.8', '0.9', '1.0', '1.2', '1.4', '2.0', '3.0', '4.0'],
         toolbar: [
-            // [groupName, [list of button]]
-            //['style', ['bold', 'italic', 'underline', 'clear', 'height', 'hr', 'addclass']],
             ['color', ['color']],
             ['style', ['hr', 'addclass']],
             ['font', ['strikethrough', 'superscript', 'subscript', 'fontsize']],
@@ -169,18 +167,18 @@ $(document).ready(function() {
             ['view', ['fullscreen', 'codeview']]
         ],
     });
+
+    $("#closeSidebarButton").click(
+        function(){
+            $("#sidebar").toggleClass("d-none");
+            $("#maincontent").toggleClass("col-sm-12 col-md-12 col-lg-12 mt-3");
+    });
+
+    $(document).attr("title", "{{ isset($note) ? 'n: '.$note -> title : nNotes }}");
 });
 </script>
 
 <script>hljs.initHighlightingOnLoad();</script>
-
-<script>
-$(document).ready(function() {
-    $("#closeSidebarButton").click(function(){
-        $("#sidebar").toggleClass("d-none");
-    });
-});
-</script>
 
 </body>
 
