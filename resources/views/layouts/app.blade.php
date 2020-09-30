@@ -150,8 +150,7 @@ $(document).ready(function() {
             debug: false,
             classTags: ["text-success", "text-primary", "text-info", "text-danger", "text-muted", "alert alert-primary", "alert alert-success", "alert alert-danger", "alert alert-info", "text-jusitfy", "text-monospace", "border", "border border-primary", "border border-danger", "sticky-top", "shadow-sm p-3 mb-5 bg-white rounded", "shadow p-3 mb-5 bg-white rounded", "shadow-lg p-3 mb-5 bg-white rounded"]
         },
-        height: 300,                 // set editor height
-        minHeight: 200,             // set minimum height of editor
+        minHeight: 500,             // set minimum height of editor
         maxHeight: null,             // set maximum height of editor
         focus: true,                 // set focus to editable area after initializing summernote
         lineHeights: ['0.8', '0.9', '1.0', '1.2', '1.4', '2.0', '3.0', '4.0'],
