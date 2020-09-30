@@ -23,11 +23,9 @@
         <div class="col-sm-4">
             <input type="text" class="form-control form-control-sm" name="language" value="plaintext" >
             <small id="tags" class="form-text text-muted">Primjeri:
-                <span class="badge badge-primary">nohighlight</span>
-                <span class="badge badge-primary">plaintext</span>
+                <span class="badge badge-succes">none</span>
                 <span class="badge badge-primary">bash</span>
                 <span class="badge badge-primary">python</span>
-                <span class="badge badge-primary">asm</span>
                 <span class="badge badge-primary">html</span>
             </small>
         </div>
