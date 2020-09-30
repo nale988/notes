@@ -27,13 +27,17 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <button type="button" id="closeSidebarButton" class="btn btn-light btn-sm pr-2 mr-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M6 12.796L11.481 8 6 3.204v9.592zm.659.753l5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+                    </svg>
+                </button>
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Notes') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
@@ -125,10 +129,10 @@
                 @endif
                 @auth
                 <div class="row">
-                    <div class="col-sm-12 col-md-3 mt-3">
+                    <div class="col-sm-12 col-md-3 mt-3" id="sidebar">
                         @include('sidebar')
                     </div>
-                    <div class="col-sm-12 col-md-9 mt-3">
+                    <div class="col mt-3">
                         @yield('content')
                     </div>
                 </div>
@@ -169,6 +173,14 @@ $(document).ready(function() {
 </script>
 
 <script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+$(document).ready(function() {
+    $("#closeSidebarButton").click(function(){
+        $("#sidebar").toggleClass("d-none");
+    });
+});
+</script>
 
 </body>
 
