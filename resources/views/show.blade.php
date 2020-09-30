@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="card-body">
-    <pre class="pre-scrollable">
+    <pre class="pre-scrollable" style="max-height: 90vh">
         @if($note -> language == 'none' || $note -> language == 'nothing' || $note -> language == 'plaintext')
             {!! $note -> note !!}
         @else
