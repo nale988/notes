@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div class="container-fluid">
+
     <div class="card">
         <div class="card-header bg-light">
             <div class="row">
@@ -121,7 +121,6 @@
         </div>
       </div>
     </div>
-</div>
 {{-- @push('scripts')
     <script>
         $(document).ready(function() {
