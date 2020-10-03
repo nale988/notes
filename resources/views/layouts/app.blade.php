@@ -178,7 +178,7 @@ $(document).ready(function() {
             $("#maincontent").toggleClass("col-sm-12 col-md-12 col-lg-12 mt-3");
     });
 
-    $(document).attr("title", "{{ isset($note) ? 'n: '.$note -> title : 'nNotes' }}");
+    $(document).attr("title", "{{ isset($note) ? 'n: '.$note -> title : 'Notes' }}");
 });
 </script>
 
