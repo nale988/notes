@@ -158,7 +158,7 @@ $(document).ready(function() {
         },
         minHeight: 500,
         maxHeight: null,
-        focus: true,
+        // focus: true,
         lineHeights: ['0.8', '0.9', '1.0', '1.2', '1.4', '2.0', '3.0', '4.0'],
         toolbar: [
             ['color', ['color']],
