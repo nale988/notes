@@ -172,7 +172,9 @@ $(document).ready(function() {
 
     $("#closeSidebarButton").click(
         function(){
-            $("#sidebar").toggleClass("d-none");
+            // $("#sidebar").slideToggle(150);
+            // $("#sidebar").toggleClass("d-none");
+            $("#sidebar").fadeToggle(200);
             $("#maincontent").toggleClass("col-sm-12 col-md-12 col-lg-12 mt-3");
     });
 
