@@ -2,7 +2,7 @@
     @foreach($tags as $tag)
     @isset($tag)
         @if(count($tag -> notes) > 0)
-            <li class="list-group-item list-group-item-action">
+            <li class="list-group-item list-group-item-action" id="tag{{ preg_replace('/[^a-z0-9.]+/i', '-', $tag -> tag) }}">
             <a data-toggle="collapse" style="text-decoration: none; color: #000;" href="#c{{ preg_replace('/[^a-z0-9.]+/i', '-', $tag -> tag) }}" role="button" aria-expanded="false" aria-controls="c{{ preg_replace('/[^a-z0-9.]+/i', '-', $tag -> tag) }}">
             <div class="d-flex justify-content-between align-items-center">
                 @if($tag -> tag == "#important")
@@ -32,6 +32,6 @@
             </div>
             @endif
         </li>
-        @endisset
-        @endforeach
+    @endisset
+    @endforeach
 </ul>

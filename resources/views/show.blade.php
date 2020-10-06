@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
-    <div class="card">
+<div class="card">
         <div class="card-header bg-light">
             <div class="row">
                 <div class="col-6">
@@ -24,7 +23,7 @@
             <div class="row">
                 <div class="col-12 text-left">
                 @foreach($note_tags as $tag)
-                    <span class="badge badge-pill badge-info">{{ $tag -> tag }}</span>
+                <a href="#tag{{ preg_replace('/[^a-z0-9.]+/i', '-', $tag -> tag) }}" class="badge badge-pill badge-info">{{ $tag -> tag }}</a>
                 @endforeach
                 </div>
             </div>
@@ -119,8 +118,8 @@
                 <a type="button" href="{{ route('deleteoldversions', $note -> note_id) }}" class="btn btn-primary btn-sm">Obriši</a>
             @endif
         </div>
-      </div>
     </div>
+</div>
 {{-- @push('scripts')
     <script>
         $(document).ready(function() {

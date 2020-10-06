@@ -25,7 +25,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md sticky-top navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <button type="button" id="closeSidebarButton" class="btn btn-sm">
                     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -176,6 +176,14 @@ $(document).ready(function() {
             // $("#sidebar").toggleClass("d-none");
             $("#sidebar").fadeToggle(200);
             $("#maincontent").toggleClass("col-sm-12 col-md-12 col-lg-12 mt-3");
+    });
+
+    $('badge badge-pill badge-info').click(function() {
+    event.preventDefault();
+    var hash = this.hash;
+
+    // var txt = $(this).attr('href');
+    //alert(txt);
     });
 
     $(document).attr("title", "{{ isset($note) ? 'n: '.$note -> title : 'Notes' }}");
