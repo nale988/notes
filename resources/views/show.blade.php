@@ -29,13 +29,15 @@
             </div>
         </div>
         <div class="card-body">
-        <pre class="pre-scrollable" style="max-height: 75vh">
             @if($note -> language == 'none' || $note -> language == 'nothing' || $note -> language == 'plaintext')
+            <div class="font-weight-normal">
                 {!! $note -> note !!}
+            </div>
             @else
+            <pre class="pre-scrollable" style="max-height: 75vh">
                 <code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre>
+            </div>
             @endif
-        </div>
         <div class="card-footer bg-light">
             <div class="row">
                 <div class="col text-left">
