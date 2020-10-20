@@ -6,7 +6,7 @@
                 <div class="col-6">
                     <strong>{{ $note -> title }}</strong><small class="text-muted">&nbsp;&nbsp;{{ date('d. m. Y. H:i', strtotime($note -> updated_at)) }}</small>
                 </div>
-                <div class="col text-right">
+                <div class="col text-right d-print-none">
                     <div class="dropdown dropleft">
                         <a class="btn btn-light btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Opcije
@@ -20,7 +20,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row d-print-none">
                 <div class="col-12 text-left">
                 @foreach($note_tags as $tag)
                 <a href="#tag{{ preg_replace('/[^a-z0-9.]+/i', '-', $tag -> tag) }}" class="badge badge-pill badge-info">{{ $tag -> tag }}</a>
@@ -38,7 +38,7 @@
                 <code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre>
             </div>
             @endif
-        <div class="card-footer bg-light">
+        <div class="card-footer bg-light d-print-none">
             <div class="row">
                 <div class="col text-left">
                     <small class="text-muted">Jezik: <strong>{{ $note -> language }}</strong></small>
