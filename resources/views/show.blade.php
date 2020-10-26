@@ -36,8 +36,8 @@
             @else
             <pre class="pre-scrollable" style="max-height: 75vh">
                 <code class="{{ $note -> language }}">{!! $note -> note !!}</code></pre>
-            </div>
             @endif
+        </div>
         <div class="card-footer bg-light d-print-none">
             <div class="row">
                 <div class="col text-left">
